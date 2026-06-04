@@ -372,17 +372,18 @@ def preprocess_old_state(state_dict: dict, config: MMGroundingDinoConfig) -> dic
                 new_key = f"encoder.bbox_head.{cls_or_reg}_branch.{suffix}"
                 new_state_dict[new_key] = new_state_dict.pop(k)  # move
 
-        # remove unused params
+       # remove unused params
         if (
             k == "dn_query_generator.label_embedding.weight"
             or k == "language_model.language_backbone.body.model.embeddings.position_ids"
             or k == "image_seperate.weight"
+            or k == "image_separate.weight"
             or k.startswith("lmm")
             or k.startswith("connector")
             or k.startswith("region_connector")
             or k.startswith("ref_point_head")
         ):
-            new_state_dict.pop(k)
+            new_state_dict.pop(k, None)
 
     return new_state_dict
 
