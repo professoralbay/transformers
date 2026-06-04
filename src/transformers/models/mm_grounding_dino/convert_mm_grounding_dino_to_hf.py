@@ -371,8 +371,7 @@ def preprocess_old_state(state_dict: dict, config: MMGroundingDinoConfig) -> dic
             else:
                 new_key = f"encoder.bbox_head.{cls_or_reg}_branch.{suffix}"
                 new_state_dict[new_key] = new_state_dict.pop(k)  # move
-
-        # remove unused params
+  # remove unused params
         if (
             k == "dn_query_generator.label_embedding.weight"
             or k == "language_model.language_backbone.body.model.embeddings.position_ids"
@@ -383,10 +382,8 @@ def preprocess_old_state(state_dict: dict, config: MMGroundingDinoConfig) -> dic
             or k.startswith("ref_point_head")
         ):
             new_state_dict.pop(k)
-
+            
     return new_state_dict
-
-
 # Copied from transformers/models/siglip2/convert_siglip2_to_hf.py
 def convert_old_keys_to_new_keys(state_dict_keys: list) -> dict:
     """
